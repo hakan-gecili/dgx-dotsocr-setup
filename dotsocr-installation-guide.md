@@ -42,7 +42,7 @@ python -c "import torch; print(f'PyTorch: {torch.__version__}'); print(f'CUDA: {
 
 ```bash
 # Navigate to your working directory
-cd /home/naq2/hakan  # or your preferred location
+cd ~/ml_work  # or your preferred location
 
 # Clone the repository (avoid periods in directory name)
 git clone https://github.com/rednote-hilab/dots.ocr.git DotsOCR
@@ -57,7 +57,7 @@ cd DotsOCR
 
 ```bash
 # Activate the testenv environment where vLLM is installed
-source /home/naq2/hakan/testenv/bin/activate
+source ~/ml_work/testenv/bin/activate
 ```
 
 ---
@@ -146,10 +146,10 @@ DotsOCR requires pre-trained model weights. Download them using the provided too
 
 ```bash
 # Activate environment (if not already active)
-source /home/naq2/hakan/testenv/bin/activate
+source ~/ml_work/testenv/bin/activate
 
 # Navigate to DotsOCR directory
-cd /home/naq2/hakan/DotsOCR
+cd ~/ml_work/DotsOCR
 
 # Download model weights
 python3 tools/download_model.py
@@ -166,7 +166,7 @@ This will download the Qwen2-VL model weights needed for document parsing.
 Always activate the environment before using DotsOCR:
 
 ```bash
-source /home/naq2/hakan/testenv/bin/activate
+source ~/ml_work/testenv/bin/activate
 ```
 
 ### Running DotsOCR
@@ -232,8 +232,8 @@ python -c "import transformers; print(transformers.__version__)"
 
 **Solution:**
 ```bash
-cd /home/naq2/hakan/DotsOCR
-source /home/naq2/hakan/testenv/bin/activate
+cd ~/ml_work/DotsOCR
+source ~/ml_work/testenv/bin/activate
 pip install -e . --no-deps
 ```
 
@@ -246,7 +246,7 @@ Model checkpoint not found
 
 **Solution:**
 ```bash
-cd /home/naq2/hakan/DotsOCR
+cd ~/ml_work/DotsOCR
 python3 tools/download_model.py
 ```
 
@@ -290,7 +290,7 @@ set -e  # Exit on error
 echo "=== DotsOCR ARM64 Installation Script ==="
 
 # Configuration
-WORK_DIR="/home/naq2/hakan"
+WORK_DIR="~/ml_work"
 VENV_PATH="$WORK_DIR/testenv"
 DOTSOCR_DIR="$WORK_DIR/DotsOCR"
 
@@ -364,7 +364,7 @@ chmod +x install_dotsocr_arm64.sh
 ## Environment Layout
 
 ```
-/home/naq2/hakan/
+~/ml_work/
 ├── testenv/                    # Python virtual environment
 │   ├── bin/
 │   │   └── python3            # Python 3.12
@@ -394,7 +394,7 @@ chmod +x install_dotsocr_arm64.sh
 
 ```bash
 # Activate environment
-source /home/naq2/hakan/testenv/bin/activate
+source ~/ml_work/testenv/bin/activate
 
 # Check installations
 python -c "import vllm, dots_ocr, torch; print('All OK')"
@@ -403,11 +403,11 @@ python -c "import vllm, dots_ocr, torch; print('All OK')"
 python -c "import vllm, dots_ocr, transformers; print(f'vLLM: {vllm.__version__}'); print(f'DotsOCR: 1.0'); print(f'Transformers: {transformers.__version__}')"
 
 # Run DotsOCR web UI
-cd /home/naq2/hakan/DotsOCR
+cd ~/ml_work/DotsOCR
 python app.py
 
 # Download models (if not done during installation)
-cd /home/naq2/hakan/DotsOCR
+cd ~/ml_work/DotsOCR
 python3 tools/download_model.py
 ```
 
