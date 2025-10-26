@@ -1,7 +1,7 @@
 # DotsOCR Usage Guide - Text Extraction from Images
 
 **Date Created:** 2025-10-25
-**Environment:** /home/naq2/hakan/testenv
+**Environment:** ~/ml_work/testenv
 
 ---
 
@@ -11,10 +11,10 @@
 
 ```bash
 # Activate the environment
-source /home/naq2/hakan/testenv/bin/activate
+source /ml_work/testenv/bin/activate
 
 # Navigate to DotsOCR directory
-cd /home/naq2/hakan/DotsOCR
+cd /ml_work/DotsOCR
 
 # Run the demo script with your image
 python demo/demo_hf.py
@@ -24,7 +24,7 @@ python demo/demo_hf.py
 
 ---
 
-## Extracted Text from Carol_jones.jpg
+## Extracted Text from sample_image.jpg
 
 DotsOCR successfully extracted all text and layout information from the patient form:
 
@@ -34,49 +34,16 @@ DotsOCR successfully extracted all text and layout information from the patient 
   {
     "bbox": [11, 2, 171, 18],
     "category": "Section-header",
-    "text": "PATIENT INFORMATION"
+    "text": "XXXXX"
   },
   {
     "bbox": [11, 36, 642, 214],
     "category": "Text",
-    "text": "Name Carol H Jones Birth date 1-20-68 Home phone 740-555-1248..."
+    "text": "XXXXXX..."
   },
   ...
 ]
 ```
-
-### Full Extracted Content:
-
-**PATIENT INFORMATION (CONFIDENTIAL)**
-- Name: Carol H Jones
-- Birth date: 1-20-68
-- Home phone: 740-555-1248
-- Address: 743 Evergreen Terrace, Springfield, OH 12345
-- Marital Status: Married
-- Employer: Rockford, Inc. (Work phone: 740-555-1234)
-- Business Address: 1 Rockford Place, Shelbyville, OH 211346
-- Spouse: John Jones (Self-employed, Work phone: 740-555-8654)
-- Emergency Contact: John Jones (740-555-1248)
-- Referring Doctor: Henry Peterson, MD
-
-**RESPONSIBLE PARTY**
-- Carol Jones (Self)
-- Address: 743 Evergreen Terrace, Springfield, OH 12345
-- Employer: Rockford, Inc. (740-555-1234)
-- Currently a patient: Yes
-
-**INSURANCE INFORMATION**
-- Insured: Carol Jones (Self)
-- Birth date: 1-20-68
-- SSN: 123-45-6789
-- Date Employed: 5-1-93
-- Employer: Rockford, Inc. (740-555-1234)
-- Employer Address: 1 Rockford Place, Shelbyville, OH 211346
-- Insurance: Anthem BC/BS
-- Group number: 51045
-- Insurance Address: 521 Anthem Drive, New Haberville, OH 211436
-- Additional Insurance: NO
-
 ---
 
 ## How to Use DotsOCR for Your Images
@@ -86,7 +53,7 @@ DotsOCR successfully extracted all text and layout information from the patient 
 #### Step 1: Edit the Demo Script
 
 ```bash
-cd /home/naq2/hakan/DotsOCR
+cd /ml_work/DotsOCR
 nano demo/demo_hf.py
 ```
 
@@ -105,8 +72,8 @@ prompt = dict_promptmode_to_prompt["prompt_ocr"]  # Simple text extraction
 #### Step 3: Run the Script:
 
 ```bash
-source /home/naq2/hakan/testenv/bin/activate
-cd /home/naq2/hakan/DotsOCR
+source /ml_work/testenv/bin/activate
+cd /ml_work/DotsOCR
 python demo/demo_hf.py
 ```
 
@@ -128,7 +95,7 @@ if "LOCAL_RANK" not in os.environ:
     os.environ["LOCAL_RANK"] = "0"
 
 # Load model
-model_path = "/home/naq2/hakan/DotsOCR/weights/DotsOCR"
+model_path = "/ml_work/DotsOCR/weights/DotsOCR"
 model = AutoModelForCausalLM.from_pretrained(
     model_path,
     attn_implementation="eager",
@@ -243,8 +210,8 @@ Bounding Box: [50, 100, 300, 200]
 
 ### Files Modified:
 
-1. `/home/naq2/.cache/huggingface/modules/transformers_modules/DotsOCR/configuration_dots.py`
-2. `/home/naq2/hakan/DotsOCR/weights/DotsOCR/configuration_dots.py`
+1. `.cache/huggingface/modules/transformers_modules/DotsOCR/configuration_dots.py`
+2. `/ml_work/DotsOCR/weights/DotsOCR/configuration_dots.py`
 
 ### Changes Made:
 
@@ -269,7 +236,7 @@ class DotsVLProcessor(Qwen2_5_VLProcessor):
 
 ### First Run:
 - Model loading: ~35 seconds
-- Inference (simple image): ~2-3 minutes
+- Inference (simple image): ~30 seconds
 - GPU Memory: ~6-8GB VRAM
 
 ### Subsequent Runs:
@@ -306,7 +273,7 @@ model = AutoModelForCausalLM.from_pretrained(
 
 ```bash
 # Clear Python cache
-rm -rf /home/naq2/.cache/huggingface/modules/transformers_modules/DotsOCR/__pycache__/
+rm -rf .cache/huggingface/modules/transformers_modules/DotsOCR/__pycache__/
 
 # Re-run the script
 python demo/demo_hf.py
@@ -351,7 +318,7 @@ python demo/demo_hf.py
 ### 1. Extract Text from Medical Forms
 
 ```bash
-cd /home/naq2/hakan/DotsOCR
+cd /ml_work/DotsOCR
 python demo/demo_hf.py
 # Edit to point to medical form image
 # Use prompt_layout_all_en for structured extraction
@@ -396,10 +363,10 @@ for image_path in glob.glob("/path/to/images/*.jpg"):
 
 ```bash
 # Activate environment
-source /home/naq2/hakan/testenv/bin/activate
+source /ml_work/testenv/bin/activate
 
 # Navigate to DotsOCR
-cd /home/naq2/hakan/DotsOCR
+cd /ml_work/DotsOCR
 
 # Extract text from image (simple OCR)
 python demo/demo_hf.py  # After editing image_path
@@ -416,7 +383,7 @@ python -c "import torch; from transformers import AutoModelForCausalLM; print('M
 ## File Locations
 
 ```
-/home/naq2/hakan/
+/ml_work/
 ├── testenv/                                    # Virtual environment
 ├── DotsOCR/                                    # DotsOCR source
 │   ├── demo/
@@ -431,7 +398,7 @@ python -c "import torch; from transformers import AutoModelForCausalLM; print('M
 │           ├── configuration_dots.py           # Configuration (MODIFIED)
 │           ├── model-00001-of-00002.safetensors
 │           └── model-00002-of-00002.safetensors
-├── Carol_jones.jpg                             # Test image
+├── sample_image.jpg                             # Test image
 ├── extract_text_dotsocr.py                     # Custom script (deprecated)
 ├── dotsocr-usage-guide.md                      # This file
 ├── dotsocr-installation-guide.md               # Installation guide
@@ -460,7 +427,7 @@ DotsOCR is now fully functional and can extract text from images with high accur
 ✓ Table and formula recognition
 ✓ Fast inference with GPU acceleration
 
-**Performance on Carol_jones.jpg:**
+**Performance on sample_image.jpg:**
 - Correctly identified all sections
 - Extracted all text accurately
 - Provided bounding boxes for each element
