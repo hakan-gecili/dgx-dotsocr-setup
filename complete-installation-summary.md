@@ -8,7 +8,7 @@
 
 ---
 
-## Overview
+## ~/ml_work/testenv
 
 This document summarizes the complete installation of a high-performance machine learning environment on ARM64 with CUDA support, including:
 
@@ -22,7 +22,7 @@ This document summarizes the complete installation of a high-performance machine
 
 ### Location
 ```
-/home/naq2/hakan/testenv
+~/ml_work/testenv
 ```
 
 ### Python Version
@@ -67,7 +67,7 @@ Python 3.12.3
 ## Installation Timeline
 
 ### Phase 1: Environment Setup
-1. Created virtual environment: `/home/naq2/hakan/testenv`
+1. Created virtual environment: `~/ml_work/testenv`
 2. Upgraded pip to latest version
 3. Verified system: ARM64, CUDA 13.0 driver, Python 3.12
 
@@ -78,7 +78,7 @@ Python 3.12.3
 4. Verified: `torch.cuda.is_available() == True`
 
 ### Phase 3: vLLM Installation
-1. Cloned vLLM repository: `/home/naq2/hakan/vllm`
+1. Cloned vLLM repository: `~/ml_work/vllm`
 2. Initial build attempt → Failed (missing python3-dev headers)
 3. Installed system dependencies:
    - `python3-dev`
@@ -88,7 +88,7 @@ Python 3.12.3
 6. Successfully compiled CUDA kernels and Flash Attention
 
 ### Phase 4: DotsOCR Installation
-1. Cloned DotsOCR repository: `/home/naq2/hakan/DotsOCR`
+1. Cloned DotsOCR repository: `~/ml_work/DotsOCR`
 2. Installed dependencies manually (avoiding flash-attn rebuild)
 3. Resolved pydantic version conflict (prioritized vLLM >=2.12)
 4. Installed DotsOCR package in editable mode
@@ -168,7 +168,7 @@ pip install transformers==4.51.3
 ## Directory Structure
 
 ```
-/home/naq2/hakan/
+~/ml_work/
 ├── testenv/                                    # Virtual environment
 │   ├── bin/
 │   │   ├── python3                            # Python 3.12.3
@@ -241,7 +241,7 @@ Follow these guides in order:
 
 ### Activate Environment
 ```bash
-source /home/naq2/hakan/testenv/bin/activate
+source ~/ml_work/testenv/bin/activate
 ```
 
 ### Verify Installation
@@ -297,7 +297,7 @@ python -m vllm.entrypoints.openai.api_server \
 ### Use DotsOCR
 ```bash
 # Navigate to DotsOCR directory
-cd /home/naq2/hakan/DotsOCR
+cd ~/ml_work/DotsOCR
 
 # Download models (first time only)
 python3 tools/download_model.py
@@ -352,23 +352,23 @@ python inference.py --image path/to/document.pdf
 
 ### Update vLLM
 ```bash
-source /home/naq2/hakan/testenv/bin/activate
-cd /home/naq2/hakan/vllm
+source ~/ml_work/testenv/bin/activate
+cd ~/ml_work/vllm
 git pull
 pip install --no-build-isolation -e .
 ```
 
 ### Update DotsOCR
 ```bash
-source /home/naq2/hakan/testenv/bin/activate
-cd /home/naq2/hakan/DotsOCR
+source ~/ml_work/testenv/bin/activate
+cd ~/ml_work/DotsOCR
 git pull
 pip install -e . --no-deps
 ```
 
 ### Update PyTorch Nightly
 ```bash
-source /home/naq2/hakan/testenv/bin/activate
+source ~/ml_work/testenv/bin/activate
 pip install --upgrade torch torchvision torchaudio \
     --index-url https://download.pytorch.org/whl/nightly/cu128
 ```
@@ -402,7 +402,7 @@ set -e
 echo "=== ARM64 ML Environment Setup ==="
 
 # Configuration
-WORK_DIR="/home/naq2/hakan"
+WORK_DIR="~/ml_work"
 VENV_NAME="testenv"
 
 # Part 1: vLLM Installation
@@ -475,68 +475,3 @@ Common issues:
 
 ---
 
-## Version History
-
-| Date | Change | By |
-|------|--------|-----|
-| 2025-10-25 | Initial installation and documentation | Claude Code |
-
----
-
-## Appendix: Package List
-
-<details>
-<summary>Click to expand full package list (150+ packages)</summary>
-
-```bash
-# Run this to get full list:
-source /home/naq2/hakan/testenv/bin/activate
-pip list
-```
-
-Key packages:
-- accelerate==1.11.0
-- anthropic==0.71.0
-- compressed-tensors==0.12.2
-- dots_ocr==1.0
-- einops==0.8.1
-- fastapi==0.120.0
-- flash-attn==2.8.0.post2
-- flashinfer-python==0.4.1
-- gradio==5.49.1
-- gradio_image_annotation==0.7.0
-- huggingface-hub==0.30.0
-- lm-format-enforcer==0.11.3
-- modelscope==1.24.7
-- numba==0.61.2
-- numpy==2.3.4
-- openai==2.6.1
-- opencv-python-headless==4.12.0.88
-- pillow==12.0.0
-- prometheus-client==0.23.1
-- protobuf==6.33.0
-- pydantic==2.12.3
-- PyMuPDF==1.26.5
-- pyzmq==27.1.0
-- qwen_vl_utils==0.1.2
-- ray==2.50.1
-- scipy==1.16.2
-- sentencepiece==0.2.1
-- tiktoken==0.12.0
-- tokenizers==0.22.1
-- torch==2.10.0.dev20251024+cu128
-- torchaudio==2.10.0.dev20251024+cu128
-- torchvision==0.20.0.dev20251024+cu128
-- transformers==4.51.3
-- triton_kernels==1.0.0
-- vllm==0.11.1rc4.dev6+g66a168a19.d20251025.cu130
-- xgrammar==0.1.25
-
-Plus 100+ more dependencies...
-</details>
-
----
-
-**Last Updated:** 2025-10-25
-**System:** Ubuntu 24.04 LTS ARM64, NVIDIA GB10 GPU
-**Maintainer:** Installation automated with Claude Code
