@@ -99,7 +99,7 @@ model_path = "/ml_work/DotsOCR/weights/DotsOCR"
 model = AutoModelForCausalLM.from_pretrained(
     model_path,
     attn_implementation="eager",
-    dtype=torch.bfloat16,
+    torch_dtype=torch.bfloat16,
     device_map="auto",
     trust_remote_code=True
 )
@@ -259,7 +259,7 @@ class DotsVLProcessor(Qwen2_5_VLProcessor):
 model = AutoModelForCausalLM.from_pretrained(
     model_path,
     attn_implementation="eager",  # Changed from flash_attention_2
-    dtype=torch.bfloat16,
+    torch_dtype=torch.bfloat16,
     device_map="auto",
     trust_remote_code=True
 )
