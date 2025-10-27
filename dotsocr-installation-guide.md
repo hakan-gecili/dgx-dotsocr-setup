@@ -161,36 +161,7 @@ This will download the Qwen2-VL model weights needed for document parsing.
 
 ## Usage
 
-### Activating the Environment
-
-Always activate the environment before using DotsOCR:
-
-```bash
-source ~/ml_work/testenv/bin/activate
-```
-
-### Running DotsOCR
-
-Refer to the repository's README for usage examples. Typical workflows include:
-
-1. **Command Line Interface:**
-   ```bash
-   python inference.py --image path/to/document.pdf
-   ```
-
-2. **Gradio Web UI:**
-   ```bash
-   python app.py
-   ```
-
-3. **Python API:**
-   ```python
-   from dots_ocr import DotsOCR
-
-   model = DotsOCR()
-   results = model.parse_document("path/to/document.pdf")
-   print(results)
-   ```
+Please refer to `dotsocr-usage-guide.md` file
 
 ---
 
